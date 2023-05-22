@@ -3,9 +3,12 @@ sudo pacman -Syyu
 
 # Install desired packages, separated for readability
 sudo pacman -S pacman-contrib piper xfce4-whiskermenu-plugin ffmpeg cdrkit xdg-user-dirs zip
-# sudo pacman -S chromium qbittorrent yt-dlp gftp obs-studio 
 sudo pacman -S xcape ntfs-3g firefox vlc gparted gnome-disk-utility baobab galculator p7zip psensor syncthing
-sudo pacman -S virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft virt-viewer handbrake libwmf libopenraw libavif libheif libjxl librsvg webp-pixbuf-loader networkmanager
+# Install virtualization packages, networkmanager is used to create a bridge
+sudo pacman -S virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft networkmanager
+# sudo pacman -S chromium qbittorrent yt-dlp gftp obs-studio virt-viewer handbrake 
+# What are all these used for or why did I put them in the script to begin with?
+# sudo pacman -S libwmf libopenraw libavif libheif libjxl librsvg webp-pixbuf-loader
 
 # Install all of VLCs optional dependencies to fix fucked video playback (doesn't install kwallet)
 sudo pacman -S pcsclite aribb25 aribb24 projectm libgoom2 lirc sdl_image libtiger libkate zvbi lua52-socket libmicrodns protobuf ttf-dejavu smbclient libmtp vcdimager libgme libva-intel-driver libva-vdpau-driver libdc1394
