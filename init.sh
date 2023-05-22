@@ -32,6 +32,7 @@ nmcli connection up bridge-slave-eno1
 # python3 -m demucs -d cpu PATH_TO_AUDIO_FILE_1
 
 # Enable Super key, Syncthing, TRIM & libvirt daemon
+# This xcape command needs to be called on startup, ~/.bashrc?
 xcape -e 'Super_L=Alt_L|F1'
 systemctl enable --now syncthing.service --user
 sudo systemctl enable --now fstrim.timer
@@ -45,6 +46,7 @@ cd ..
 rm -rf ./yay-bin
 
 # Install needed AUR packages
+# For some reason screendimmer is f'd at the moment :(
 yay -S screendimmer
 # yay -S yandex-browser kotatogram-desktop-bin tartube yacy
 # yay -S ttf-vlgothic neo-matrix wmctrl
