@@ -3,9 +3,12 @@ sudo pacman -Syyu
 
 # Install desired packages, separated for readability
 sudo pacman -S pacman-contrib piper xfce4-whiskermenu-plugin ffmpeg cdrkit xdg-user-dirs zip
-# sudo pacman -S chromium qbittorrent yt-dlp gftp obs-studio git catfish
+# sudo pacman -S chromium qbittorrent yt-dlp gftp obs-studio 
 sudo pacman -S xcape ntfs-3g firefox vlc gparted gnome-disk-utility baobab galculator p7zip psensor syncthing
 sudo pacman -S virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft virt-viewer handbrake libwmf libopenraw libavif libheif libjxl librsvg webp-pixbuf-loader networkmanager
+
+# Install all of VLCs optional dependencies to fix fucked video playback (doesn't install kwallet)
+sudo pacman -S pcsclite aribb25 aribb24 projectm libgoom2 lirc sdl_image libtiger libkate zvbi lua52-socket libmicrodns protobuf ttf-dejavu smbclient libmtp vcdimager libgme libva-intel-driver libva-vdpau-driver libdc1394
 
 # Fix Virt-Manager issues
 sudo mousepad /etc/libvirt/qemu.conf
@@ -26,8 +29,8 @@ nmcli connection up bridge-slave-eno1
 # Create user folders
 #xdg-user-dirs-update
 
-# Install demucs
 # Use colab instead since this shit doesn't support AMD and ends up using the CPU
+# Install demucs
 # pip3 install --user -U demucs
 # python3 -m demucs -d cpu PATH_TO_AUDIO_FILE_1
 
