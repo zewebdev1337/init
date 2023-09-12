@@ -10,8 +10,8 @@ su - admin
 sudo pacman -Syyu
  
 # Install desired packages, separated for readability
-sudo pacman -S pacman-contrib piper xfce4-whiskermenu-plugin ffmpeg cdrkit xdg-user-dirs zip numlockx
-sudo pacman -S xcape ntfs-3g firefox vlc gparted gnome-disk-utility baobab galculator p7zip psensor syncthing nm-connection-editor
+sudo pacman -S pacman-contrib piper xfce4-whiskermenu-plugin ffmpeg cdrkit xdg-user-dirs zip numlockx unrar vlc gparted
+sudo pacman -S xcape ntfs-3g firefox gnome-disk-utility baobab galculator p7zip psensor syncthing nm-connection-editor
 # Install virtualization packages, networkmanager is used to create a bridge, (Y) to replace, regarding iptables-nft conflict
 sudo pacman -S virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft networkmanager
 # sudo pacman -S chromium qbittorrent yt-dlp gftp obs-studio virt-viewer handbrake 
