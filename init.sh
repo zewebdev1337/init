@@ -17,6 +17,7 @@ sudo pacman -S virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft 
 # sudo pacman -S chromium qbittorrent yt-dlp gftp obs-studio virt-viewer handbrake 
 # ristretto
 sudo pacman -S libwmf libopenraw libavif libheif libjxl librsvg webp-pixbuf-loader
+sudo pacman -S mame-tools
  
 # Install all of VLCs optional dependencies to fix video playback (exclude install kwallet)
 sudo pacman -S pcsclite aribb25 aribb24 projectm libgoom2 lirc sdl_image libtiger libkate zvbi lua52-socket libmicrodns protobuf ttf-dejavu smbclient libmtp vcdimager libgme libva-intel-driver libva-vdpau-driver libdc1394
