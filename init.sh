@@ -10,18 +10,9 @@ su - admin
 sudo pacman -Syyu
  
 # Install desired packages, separated for readability
-sudo pacman -S pacman-contrib piper xfce4-whiskermenu-plugin ffmpeg cdrkit xdg-user-dirs zip numlockx unrar vlc gparted
-sudo pacman -S xcape ntfs-3g firefox gnome-disk-utility baobab galculator p7zip psensor syncthing nm-connection-editor
-# Install virtualization packages, networkmanager is used to create a bridge, (Y) to replace, regarding iptables-nft conflict
-sudo pacman -S virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft networkmanager
+sudo pacman -S pacman-contrib piper xfce4-whiskermenu-plugin ffmpeg cdrkit xdg-user-dirs zip numlockx unrar vlc gparted samba ntfs-3g firefox gnome-disk-utility baobab galculator p7zip psensor syncthing nm-connection-editor virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft networkmanager libwmf libopenraw libavif libheif libjxl librsvg webp-pixbuf-loader mame-tools pcsclite aribb25 aribb24 projectm libgoom2 lirc sdl_image libtiger libkate zvbi lua52-socket libmicrodns protobuf ttf-dejavu smbclient libmtp vcdimager libgme libva-intel-driver libva-vdpau-driver libdc1394
 # sudo pacman -S chromium qbittorrent yt-dlp gftp obs-studio virt-viewer handbrake 
-# ristretto
-sudo pacman -S libwmf libopenraw libavif libheif libjxl librsvg webp-pixbuf-loader
-sudo pacman -S mame-tools
- 
-# Install all of VLCs optional dependencies to fix video playback (exclude install kwallet)
-sudo pacman -S pcsclite aribb25 aribb24 projectm libgoom2 lirc sdl_image libtiger libkate zvbi lua52-socket libmicrodns protobuf ttf-dejavu smbclient libmtp vcdimager libgme libva-intel-driver libva-vdpau-driver libdc1394
- 
+
 # Fix Virt-Manager issues
 sudo nano /etc/libvirt/qemu.conf
 # Search and uncomment:
@@ -51,7 +42,7 @@ nmcli connection up bridge-slave-eno1
 # python3 -m demucs -d cpu PATH_TO_AUDIO_FILE_1
  
 # Enable Super key
-echo "xcape -e 'Super_L=Alt_L|F1'" >> ~/.bashrc
+#echo "xcape -e 'Super_L=Alt_L|F1'" >> ~/.bashrc
  
 # Install yay
 git clone https://aur.archlinux.org/yay-bin.git
@@ -63,6 +54,7 @@ rm -rf ./yay-bin
  
 # Install needed AUR packages
 # screendimmer still doesn't work
+yay -S wsdd2
 # yay -S screendimmer
 # yay -S yandex-browser kotatogram-desktop-bin tartube yacy
 # yay -S ttf-vlgothic neo-matrix wmctrl
@@ -82,7 +74,7 @@ sudo nano /etc/default/grub
  
 # Rebuild GRUB
 sudo grub-mkconfig -o /boot/grub/grub.cfg
- 
+
 exit
  
 #########################################################
@@ -95,13 +87,15 @@ su
 # Set VFIO
 echo 'options vfio-pci ids=1002:699f,1002:aae0
 softdep amdgpu pre: vfio-pci' >> /etc/modprobe.d/vfio.conf
- 
+
 # Rebuild initramfs
 sudo mkinitcpio -p linux
 sudo mkinitcpio -p linux-zen
 sudo mkinitcpio -p linux-lts
 sudo mkinitcpio -p linux-hardened
- 
+
+mousepad /etc/samba/smb.conf
+
 # Set swappiness
 echo 'vm.swappiness = 200' >> /etc/sysctl.d/99-swappiness.conf
  
@@ -111,20 +105,10 @@ echo 'vm.swappiness = 200' >> /etc/sysctl.d/99-swappiness.conf
  
 # Switch to user for operations that need to be done as non-sudo user
  
-echo "xcape -e 'Super_L=Alt_L|F1'" >> ~/.bashrc
+#echo "xcape -e 'Super_L=Alt_L|F1'" >> ~/.bashrc
 systemctl enable --now syncthing.service --user
+systemctl enable --now smb.service
+systemctl enable --now wsdd2.service
 xfconf-query -c xfwm4 -p /general/easy_click -s none
 gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 xdg-user-dirs-update
-
-# Enable numlock on boot
-#rm -rf ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml
-#echo '<?xml version="1.0" encoding="UTF-8"?>
-
-#<channel name="keyboards" version="1.0">
-#  <property name="Default" type="empty">
-#    <property name="Numlock" type="bool" value="true"/>
-#    <property name="RestoreNumlock" type="bool" value="true"/>
-#  </property>
-#</channel>
-#' >> ~/.config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml
