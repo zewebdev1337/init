@@ -33,9 +33,6 @@ nmcli connection down eno1
 nmcli connection up bridge-br0
 nmcli connection up bridge-slave-eno1
  
-# Create user folders
-#xdg-user-dirs-update
- 
 # Use colab instead since this doesn't support AMD GPUs and ends up using the CPU
 # Install demucs
 # pip3 install --user -U demucs
@@ -109,6 +106,8 @@ echo 'vm.swappiness = 200' >> /etc/sysctl.d/99-swappiness.conf
 systemctl enable --now syncthing.service --user
 systemctl enable --now smb.service
 systemctl enable --now wsdd2.service
-xfconf-query -c xfwm4 -p /general/easy_click -s none
 gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark"
+xfconf-query -c xfwm4 -p /general/theme -s Aguamelon
+xfconf-query -c xfwm4 -p /general/easy_click -s none
 xdg-user-dirs-update
