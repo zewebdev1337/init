@@ -10,7 +10,7 @@ su - admin
 sudo pacman -Syyu
  
 # Install desired packages, separated for readability
-sudo pacman -S pacman-contrib piper xfce4-whiskermenu-plugin ffmpeg cdrkit xdg-user-dirs zip numlockx unrar vlc gparted samba ntfs-3g firefox gnome-disk-utility baobab galculator p7zip psensor syncthing nm-connection-editor virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft networkmanager libwmf libopenraw libavif libheif libjxl librsvg webp-pixbuf-loader mame-tools pcsclite aribb25 aribb24 projectm libgoom2 lirc sdl_image libtiger libkate zvbi lua52-socket libmicrodns protobuf ttf-dejavu smbclient libmtp vcdimager libgme libva-intel-driver libva-vdpau-driver libdc1394
+sudo pacman -S pacman-contrib piper xfce4-whiskermenu-plugin ffmpeg cdrkit xdg-user-dirs zip numlockx unrar vlc gparted samba ntfs-3g firefox gnome-disk-utility baobab galculator p7zip psensor syncthing nm-connection-editor virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft networkmanager libwmf libopenraw libavif libheif libjxl librsvg webp-pixbuf-loader mame-tools pcsclite aribb25 aribb24 projectm libgoom2 lirc sdl_image libtiger libkate zvbi lua52-socket libmicrodns protobuf ttf-dejavu smbclient libmtp vcdimager libgme libva-intel-driver libva-vdpau-driver libdc1394 reflector
 # sudo pacman -S chromium qbittorrent yt-dlp gftp obs-studio virt-viewer handbrake 
 
 # Fix Virt-Manager issues
@@ -111,3 +111,11 @@ xfconf-query -c xsettings -p /Net/ThemeName -s "Adwaita-dark"
 xfconf-query -c xfwm4 -p /general/theme -s Aguamelon
 xfconf-query -c xfwm4 -p /general/easy_click -s none
 xdg-user-dirs-update
+
+#########################################################
+#                          UTIL                         #
+#########################################################
+
+# Fix mirrors (pacman/yay slow download)
+# cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bkp
+# sudo reflector --country 'United States' --latest 5 --age 2 --fastest 5 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
