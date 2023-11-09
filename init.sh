@@ -10,7 +10,7 @@ su - admin
 sudo pacman -Syyu
  
 # Install desired packages, separated for readability
-sudo pacman -S pacman-contrib piper xfce4-whiskermenu-plugin ffmpeg cdrkit xdg-user-dirs zip numlockx unrar vlc gparted samba ntfs-3g firefox gnome-disk-utility baobab galculator p7zip psensor syncthing nm-connection-editor virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft networkmanager libwmf libopenraw libavif libheif libjxl librsvg webp-pixbuf-loader mame-tools pcsclite aribb25 aribb24 projectm libgoom2 lirc sdl_image libtiger libkate zvbi lua52-socket libmicrodns protobuf ttf-dejavu smbclient libmtp vcdimager libgme libva-intel-driver libva-vdpau-driver libdc1394 reflector
+sudo pacman -S pacman-contrib piper xfce4-whiskermenu-plugin udiskie mkvtoolnix-cli ffmpeg cdrkit xdg-user-dirs zip numlockx unrar vlc gparted samba ntfs-3g firefox gnome-disk-utility baobab galculator p7zip psensor syncthing nm-connection-editor virt-manager qemu-desktop libvirt edk2-ovmf dnsmasq iptables-nft networkmanager libwmf libopenraw libavif libheif libjxl librsvg webp-pixbuf-loader mame-tools pcsclite aribb25 aribb24 projectm libgoom2 lirc sdl_image libtiger libkate zvbi lua52-socket libmicrodns protobuf ttf-dejavu smbclient libmtp vcdimager libgme libva-intel-driver libva-vdpau-driver libdc1394 reflector
 # sudo pacman -S chromium qbittorrent yt-dlp gftp obs-studio virt-viewer handbrake 
 
 # Fix Virt-Manager issues
@@ -92,6 +92,25 @@ sudo mkinitcpio -p linux-lts
 sudo mkinitcpio -p linux-hardened
 
 mousepad /etc/samba/smb.conf
+
+echo '[Unit]
+Description=Automount removable media using udiskie
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/udiskie -a --no-notify
+Restart=always
+User=root
+Group=root
+PermissionsStartOnly=true
+ExecStartPre=/bin/chmod -R a+rwX /mnt/storage-hdd
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target' >> /etc/systemd/system/udiskie.service
+
+systemctl enable --now udiskie.service
 
 # Set swappiness
 echo 'vm.swappiness = 200' >> /etc/sysctl.d/99-swappiness.conf
