@@ -2,7 +2,7 @@
 #                         ADMIN                         #
 #########################################################
  
-# Switch to admin account
+# Login to admin account
 su - admin
  
 # Once in admin acct:
